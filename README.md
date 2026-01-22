@@ -1,5 +1,33 @@
 # practice-smart-contract
 solidity smart contract
+
+## Nested mapping practice
+this is a nested mapping practice from address to string to bolean
+```//SPDX-License-Identifier:MIT
+pragma solidity ^0.8.26;
+
+contract NestedMappingPractice {
+    mapping (address => mapping (string => bool)) private attendanceSheet;//declare a state variabel as nested mapping datatype
+    
+    function setAttendance (address _addr, string memory _name, bool _isPresent) public {
+        attendanceSheet[_addr][_name] = _isPresent; //set the value in nested mapping
+    }//declare a function to set values for a student
+
+    //declare a function to get the values for a student
+    function getAttendance ( address _addr, string memory _name) public view returns (bool) {
+        return attendanceSheet[_addr][_name];
+    }
+
+    //declare the delete function to toggle the value for a student
+    function toggleAttendance (address _addr, string memory _name) public {
+        attendanceSheet[_addr][_name] = !attendanceSheet[_addr][_name]; // ! is the sign of negation - to make it opposite
+    }
+}
+
+
+```
+
+
 ## Mapping smart contract
 ```
 //SPDX-License-Identifier:MIT
