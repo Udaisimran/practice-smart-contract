@@ -1,6 +1,52 @@
 # practice-smart-contract
 solidity smart contract
 
+## Struct mapping practice
+```
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.26;
+
+contract StructMapping {
+    //declare a student structure having three attributes
+    struct Student {
+        string name;
+        string email;
+        bool isAttended;
+    }
+
+    //declare a mapping from address to struct students
+    mapping(address => Student) private students;
+
+    //function to set student attendance
+    function setStudentAttendance(address _addr,string memory _name, string memory _email, bool _isAttended) public {
+        students[_addr] = Student ({
+            name: _name,
+            email: _email,
+            isAttended: _isAttended
+        });
+        
+    }
+
+    //declare a function to get students attendance information
+    function getStudentAttendance ( address _addr) public view returns (string memory, string memory, bool) {
+        return (students[_addr].name,
+                students[_addr].email,
+                students[_addr].isAttended
+        );
+    }
+
+    //declare a function to toggle the student attendance
+    function toggleStudentAttendance (address _addr) public {
+        students[_addr].isAttended =!students[_addr].isAttended;
+    }
+
+    //declare a function to update student's email
+    function modifyStudentEmail (address _addr, string memory _email) public{
+        students[_addr].email =_email;
+    }
+}
+```
+
 ## Nested mapping practice
 this is a nested mapping practice from address to string to bolean
 ```//SPDX-License-Identifier:MIT
